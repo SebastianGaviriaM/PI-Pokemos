@@ -41,6 +41,11 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 const { Pokemon, Type } = sequelize.models;
 
+const pokxtemp = sequelize.define('pokxtype', {
+   // Atributos específicos de la tabla intermedia
+ }, {
+   timestamps: false // Desactivar createdAt y updatedAt
+ });
 // Aca vendrian las relaciones
 Pokemon.belongsToMany(Type, {through: 'pokxtemp'});
 Type.belongsToMany(Pokemon, {through: 'pokxtemp'});

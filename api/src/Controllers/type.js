@@ -1,16 +1,21 @@
-const Type = require('../models/Type');
+const {Type} = require('../db');
 
 const typeController =  {};
 
 
-typeController.getAll= async (req, res) => {
+typeController.getAll= async () => {
     try {
       const types = await Type.findAll();
-      res.json(types);
+      return types;
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: 'Error devolviendo pokemones' });
+      return { message: 'Error devolviendo pokemones' };
     }
+}
+
+typeController.createType = async(name)=>{
+  const newType = await Type.create({name});
+  return newType
 }
 
 

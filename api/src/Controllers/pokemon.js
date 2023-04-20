@@ -1,11 +1,13 @@
-const {Pokemon} = require('../db');
+const {Pokemon, Type} = require('../db');
 
 const pokemonController =  {};
 
 
 pokemonController.getAll= async () => {
     try {
-      const pokemones = await Pokemon.findAll();
+      const pokemones = await Pokemon.findAll({
+        include: Type
+      });
       return pokemones;
     } catch (error) {
       console.error(error);
@@ -13,41 +15,29 @@ pokemonController.getAll= async () => {
     }
 }
 
-pokemonController.getById= async (id) => {
-    try {
-      const pokemon = await Pokemon.findByPk(id);
-      if (pokemon) {
-        res.json(pokemon);
-      } else {
-        res.status(404).json({ message: `No se encuentra el pokemon con el id: ${id}` });
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: `Error devolviendo el pokemon id: ${id}` });
-    }
+pokemonController.getID = async(id)=>{
+  DBresult = await Pokemon.findByPk(id);
+
+  return DBresult;  
 }
 
-// pokemonController.getByName = async (req, res) => {
-//     const { name } = req.params;
+pokemonController.createPokemon = async(image, name, height, weight, health, attack, defense, speed)=>{
+  const newDog = await Pokemon.create({image, name, height, weight, health, attack, defense, speed});
+  return newDog
+}
 
-//     try {
-//       const pokemon = await Pokemon.findOne({
-//         where: {
-//           name: {
-//             [Op.iLike]: name,
-//           },
-//         },
-//       });
-//       if (pokemon) {
-//         res.json(pokemon);
-//       } else {
-//         res.status(404).json({ message: `Pokemon with name ${name}` });
-//       }
-//     } catch (error) {
-//       console.error(error);
-//       res.status(500).json({ message: `Error retrieving pokemon with name ${name}` });
-//     }
-// }
+
+
+
+pokemonController.getByName = async (name) => {
+
+    const pokemon = await Pokemon.findOne({
+      where: {name}
+    });
+
+    return pokemon;
+   
+}
 
 
 module.exports = pokemonController;
