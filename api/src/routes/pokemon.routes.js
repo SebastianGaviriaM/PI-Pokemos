@@ -5,8 +5,26 @@ const pokemonController = require('../Controllers/pokemon.js');
 
 // Ruta para obtener todos los pokemones
 pokRouter.get('/', async(req, res) =>{
+    
+    
     const DBResult = await pokemonController.getAll();
 
+    let listaDB = DBResult.map(pokemon=>{
+        let types = pokemon.Types.map(type => type.name);
+        return {
+            id: pokemon.id,
+            name: pokemon.name,
+            image: pokemon.image,
+            health: pokemon.health,
+            attack: pokemon.attack,
+            defense: pokemon.defense,
+            speed: pokemon.speed,
+            height: pokemon.height,
+            weight: pokemon.weight,
+            types
+        };
+    }); 
+    
     let listaAPI = [];
     
     const APIResult = await axios.get('https://pokeapi.co/api/v2/pokemon')
@@ -59,7 +77,7 @@ pokRouter.get('/', async(req, res) =>{
         
     }
 
-    res.json([...DBResult, ...listaPokeAPI]);
+    res.json([...listaDB, ...listaPokeAPI]);
 });
 
 

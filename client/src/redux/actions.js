@@ -1,15 +1,15 @@
 import axios from 'axios';
 
-// export const GET_DOGS = "GET_DOGS";
+export const GET_POKE = "GET_POKE";
 // export const GET_DOG_DETAIL = "GET_DOG_DETAIL";
 // export const CREATE_DOG = "CREATE_DOG";
 
-export const getDogs = () => {
+export const getPoke = () => {
 
-    // return function (dispatch) {
-    //     axios.get('http://localhost:3001/dogs').then(response=>dispatch({type: GET_DOGS, payload:response.data}))
+    return function (dispatch) {
+        axios.get('http://localhost:3001/pokemon').then(response=>dispatch({type: GET_POKE, payload:response.data}))
 
-    // };
+    };
 
 };
 

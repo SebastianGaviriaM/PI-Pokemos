@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getDogs } from "../../redux/actions";
-import DogCard from "./dogCard";
+import { getPoke } from "../../redux/actions";
+import PokeCard from "./pokeCard";
 
 class Home extends React.Component{
 
     componentDidMount(){
-        this.props.getDogs();
+        this.props.getPoke();
     }
 
     render(){
@@ -14,14 +14,12 @@ class Home extends React.Component{
             <>
                 <h1>Componente Home</h1>
                 {
-                    this.props.dogs.map(
-                        (dog)=><DogCard 
-                            imagen={dog.image} 
-                            name={dog.name} 
-                            temperaments={dog.temperaments} 
-                            weight={dog.weight}
-                            key={dog.id}
-                            id={dog.id}
+                    this.props.pokemons.map(
+                        (poke)=><PokeCard 
+                            imagen={poke.image} 
+                            name={poke.name} 
+                            types={poke.types}
+                            id={poke.id}
                         />
                     )
                 }
@@ -34,13 +32,13 @@ class Home extends React.Component{
 
 const mapStateToProps = (state)=>{
     return{
-        dogs: state.dogs
+        pokemons: state.pokemons
     }
 }
 
 const mapDispatchToProps = (dispatch)=>{
     return{
-        getDogs: ()=>dispatch(getDogs())
+        getPoke: ()=>dispatch(getPoke())
     }
 }
 

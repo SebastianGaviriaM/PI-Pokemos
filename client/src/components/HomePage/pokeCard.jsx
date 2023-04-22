@@ -1,14 +1,14 @@
 import React from "react";
 import {Link} from 'react-router-dom';
 
-const DogCard = ({imagen, name, temperaments, weight, id})=>{
+const PokeCard = ({imagen, name, types, id})=>{
     return(
         <>
             <Link to={`/dogDetail/${id}`}>
                 <h3>{name}</h3>
             </Link>
             <img src={imagen} alt={`image of ${name}`} />
-            <p>{temperaments}</p>
+            {types.map(type=>)}
             <p>{weight}</p>
             <hr></hr>
             
@@ -17,4 +17,4 @@ const DogCard = ({imagen, name, temperaments, weight, id})=>{
 }
 
 
-export default DogCard
+export default PokeCard;
