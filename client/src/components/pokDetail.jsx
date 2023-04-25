@@ -2,28 +2,35 @@ import React from "react";
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getDogDetail } from "../redux/actions";
+import { getPokDetail } from "../redux/actions";
 
-function Detail() {
+function PokDetail() {
     const { id } = useParams();
-    const {name, image, height, weight, years, temperament} = useSelector(state => state.detail);
+    const {name, image, height, weight, health, attack, defense, speed, types} = useSelector(state => state.pokDetail);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getDogDetail(id));
+        dispatch(getPokDetail(id));
     }, [id, dispatch]);
+
+    if (types===undefined) {
+        return <div>Cargando el pokemon...</div>;
+    }
 
     return (<>
             <p>Name:{name}</p>
             <p>Image: </p><img src={image}></img>
             <p>Height: {height}</p>
             <p>Weight: {weight}</p>
-            <p>Years: {years}</p>
-            <p>Temperaments: {temperament}</p>
+            <p>Health: {health}</p>
+            <p>Attack: {attack}</p>
+            <p>defense: {defense}</p>
+            <p>speed: {speed}</p>
+            {types.map(type=>type)}
     </>
     );
 }
 
 
 
-export default Detail;
+export default PokDetail;

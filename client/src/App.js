@@ -1,7 +1,7 @@
 import './App.css';
 import Home from './components/HomePage/Home';
 import Landing from './components/LandingPage';
-import Detail from './components/pokDetail';
+import PokDetail from './components/pokDetail';
 import Form from './components/Form';
 import NavBar from './components/navBar';
 import { Route } from 'react-router-dom';
@@ -23,7 +23,7 @@ function App() {
         <Home/>
       </Route>
 
-      <Route path='/dogDetail/:id' component={Detail}></Route>
+      <Route path='/pokeDetail/:id' component={PokDetail}></Route>
 
       <Route path='/Form'>
         <Form/>

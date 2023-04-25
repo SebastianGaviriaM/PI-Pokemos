@@ -35,7 +35,7 @@ pokRouter.get('/', async(req, res) =>{
     let next = APIResult.next
 
 
-    while(listaAPI.length<50){         //Esta clausula funciona como ejemplo, se puede colocar listaAPI.length<APIResult.count para obtenerlos todos
+    while(listaAPI.length<24){         //Esta clausula funciona como ejemplo, se puede colocar listaAPI.length<APIResult.count para obtenerlos todos
         let nextGet = await axios.get(next).then(response=>response.data);
         listaAPI = [...listaAPI, ...nextGet.results];
         next = nextGet.next;
@@ -201,7 +201,24 @@ pokRouter.get('/:id', async(req, res)=>{
     }
     else{
         const DBResult = await pokemonController.getID(id);
-        Data = DBResult.dataValues;
+
+        let listaDB = DBResult.map(pokemon=>{
+            let types = pokemon.Types.map(type => type.name);
+            return {
+                id: pokemon.id,
+                name: pokemon.name,
+                image: pokemon.image,
+                health: pokemon.health,
+                attack: pokemon.attack,
+                defense: pokemon.defense,
+                speed: pokemon.speed,
+                height: pokemon.height,
+                weight: pokemon.weight,
+                types
+            };
+        }); 
+        Data = listaDB;
+
     }
 
     res.json(Data);
