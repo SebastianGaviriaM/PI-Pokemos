@@ -202,22 +202,21 @@ pokRouter.get('/:id', async(req, res)=>{
     else{
         const DBResult = await pokemonController.getID(id);
 
-        let listaDB = DBResult.map(pokemon=>{
-            let types = pokemon.Types.map(type => type.name);
-            return {
-                id: pokemon.id,
-                name: pokemon.name,
-                image: pokemon.image,
-                health: pokemon.health,
-                attack: pokemon.attack,
-                defense: pokemon.defense,
-                speed: pokemon.speed,
-                height: pokemon.height,
-                weight: pokemon.weight,
-                types
-            };
-        }); 
-        Data = listaDB;
+
+
+        let pokemonSeleccionado = DBResult.dataValues;
+        Data = {
+            id: pokemonSeleccionado.id,
+            name: pokemonSeleccionado.name,
+            image: pokemonSeleccionado.image,
+            health: pokemonSeleccionado.health,
+            attack: pokemonSeleccionado.attack,
+            defense: pokemonSeleccionado.defense,
+            speed: pokemonSeleccionado.speed,
+            height: pokemonSeleccionado.height,
+            weight: pokemonSeleccionado.weight,
+            types: pokemonSeleccionado.Types
+          };
 
     }
 

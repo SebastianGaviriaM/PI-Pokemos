@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getPokDetail } from "../redux/actions";
+import { getPokDetail } from "../../redux/actions";
 
 function PokDetail() {
     const { id } = useParams();
@@ -17,6 +17,8 @@ function PokDetail() {
         return <div>Cargando el pokemon...</div>;
     }
 
+    console.log(types);
+
     return (<>
             <p>Name:{name}</p>
             <p>Image: </p><img src={image}></img>
@@ -26,7 +28,7 @@ function PokDetail() {
             <p>Attack: {attack}</p>
             <p>defense: {defense}</p>
             <p>speed: {speed}</p>
-            {types.map(type=>type)}
+            {types.map(type=>type.name)}
     </>
     );
 }

@@ -1,4 +1,4 @@
-const {Pokemon, Type} = require('../db');
+const {Pokemon, Type, pokxtypes} = require('../db');
 
 const pokemonController =  {};
 
@@ -16,7 +16,14 @@ pokemonController.getAll= async () => {
 }
 
 pokemonController.getID = async(id)=>{
-  DBresult = await Pokemon.findByPk(id);
+  DBresult = await Pokemon.findByPk(id, {
+    include: {
+      model: Type,
+      through: {
+        model: pokxtypes,
+      },
+    },
+  });
 
   return DBresult;  
 }

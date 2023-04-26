@@ -1,0 +1,26 @@
+.fondo{
+    font-family: monospace;
+    background: url("../../imagenes/Fondo.jpg") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: row;
+    align-items:center;
+    justify-content: center;
+
+    height: 10vh;
+    width: 100vw;
+}
+
+.navlink{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+
+    width:10vw;
+
+    
+
+    background-color: white;
+    border-radius: 1vw;
+    border: 2px solid yellow;
+}

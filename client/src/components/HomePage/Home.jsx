@@ -1,17 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getPoke } from "../../redux/actions";
-import PokeCard from "./pokeCard";
+import PokeCard from "../pokeCard/pokeCard";
+import styles from "./home.module.css"
 
 class Home extends React.Component {
   state = {
     currentPage: 1,
-    pageSize: 12,
+    pageSize: 15,
     searchQuery: ""
   };
 
   componentDidMount() {
-    this.props.getPoke();
+    if(this.props.pokemons.length===0){
+      this.props.getPoke();
+    }
+    
   }
 
   getPagedData = () => {
@@ -46,35 +50,39 @@ class Home extends React.Component {
 
     const totalPokemons = pokemons.length;
 
-    if (totalPokemons === 0) return <p>No hay Pokémons.</p>;
+    if (totalPokemons === 0) return <div className={styles.fondo}><p className={styles.carga}>Cargando pokemones</p></div>;
 
     const pageCount = Math.ceil(totalPokemons / pageSize);
 
     return (
-      <>
-        <h1>Componente Home</h1>
-        <div className="mb-3">
+      <div className={styles.fondo}>
+        <h1 className={styles.titulo}>Pokemones</h1>
+        <div>
           <input
             type="text"
-            className="form-control"
-            placeholder="Buscar Pokémons..."
+            
+            placeholder="Buscar Pokemones..."
             value={searchQuery}
             onChange={(e) => this.handleSearch(e.target.value)}
+            className={styles.buscador}  
           />
         </div>
-        {this.getPagedData().map((poke) => (
-          <PokeCard
-            imagen={poke.image}
-            name={poke.name}
-            types={poke.types}
-            id={poke.id}
-          />
-        ))}
+
+        <div className={styles.pokemones}>
+          {this.getPagedData().map((poke) => (
+            <PokeCard
+              imagen={poke.image}
+              name={poke.name}
+              types={poke.types}
+              id={poke.id}
+            />
+          ))}
+        </div>
         <nav>
           <ul className="pagination">
             <li className="page-item">
               <button
-                className="page-link"
+                
                 onClick={() =>
                   this.handlePageChange(currentPage === 1 ? 1 : currentPage - 1)
                 }
@@ -90,7 +98,7 @@ class Home extends React.Component {
                 }
               >
                 <button
-                  className="page-link"
+                  
                   onClick={() => this.handlePageChange(index + 1)}
                 >
                   {index + 1}
@@ -99,7 +107,7 @@ class Home extends React.Component {
             ))}
             <li className="page-item">
               <button
-                className="page-link"
+                
                 onClick={() =>
                   this.handlePageChange(
                     currentPage === pageCount ? currentPage : currentPage + 1
@@ -111,7 +119,7 @@ class Home extends React.Component {
             </li>
           </ul>
         </nav>
-      </>
+      </div>
     );
   }
 }
