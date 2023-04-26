@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getPokDetail } from "../../redux/actions";
-
+import styles from "./pokDetail.module.css"
 function PokDetail() {
     const { id } = useParams();
     const {name, image, height, weight, health, attack, defense, speed, types} = useSelector(state => state.pokDetail);
@@ -19,8 +19,10 @@ function PokDetail() {
 
     console.log(types);
 
-    return (<>
-            <p>Name:{name}</p>
+    return (
+    <div className={styles.fondo}>
+        <div className={styles.detail} >
+            <p>Name: {name}</p>
             <p>Image: </p><img src={image}></img>
             <p>Height: {height}</p>
             <p>Weight: {weight}</p>
@@ -28,8 +30,11 @@ function PokDetail() {
             <p>Attack: {attack}</p>
             <p>defense: {defense}</p>
             <p>speed: {speed}</p>
-            {types.map(type=>type.name)}
-    </>
+            <p>tipos:</p>
+            {types.map(type=><p>{type}</p>)}
+        </div>
+            
+    </div>
     );
 }
 

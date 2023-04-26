@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTypes } from "../redux/actions";
+import { getTypes } from "../../redux/actions";
 import axios from 'axios';
+import styles from "./Form.module.css"
 
 function Form() {
 
@@ -104,41 +105,44 @@ function Form() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-        <label htmlFor="image">Imagen:</label>
-        <input type="text" id="image" name="image" value={formData.image} onChange={handleInputChange} />
-
-        <label htmlFor="name">Nombre:</label>
-        <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} />
-
-        <label htmlFor="height">Altura:</label>
-        <input type="text" id="height" name="height" value={formData.height} onChange={handleInputChange} />
-
-        <label htmlFor="weight">Peso:</label>
-        <input type="text" id="weight" name="weight" value={formData.weight} onChange={handleInputChange} />
-
-        <label htmlFor="health">Salud:</label>
-        <input type="text" id="health" name="health" value={formData.health} onChange={handleInputChange} />
-
-        <label htmlFor="attack">Ataque:</label>
-        <input type="text" id="attack" name="attack" value={formData.attack} onChange={handleInputChange} />
-
-        <label htmlFor="defense">Defensa:</label>
-        <input type="text" id="defense" name="defense" value={formData.defense} onChange={handleInputChange} />
-
-        <label htmlFor="speed">Velocidad:</label>
-        <input type="text" id="speed" name="speed" value={formData.speed} onChange={handleInputChange} />
-
-        <label htmlFor="types">Tipos:</label>
-        {types.map((type) => (
-            <div key={type.id}>
-            <input type="checkbox" id={type.id} name="types" value={type.name} onChange={handleInputChange} />
-            <label htmlFor={type.name}>{type.name}</label>
-            </div>
-        ))}
-        {error && <div>{error}</div>}
-        <button type="submit">Agregar Pokémon</button>
-        </form>
+        <div className={styles.fondo}>
+            <h2 className={styles.titulo}>Crea tu propio pokemon!</h2>
+            <form onSubmit={handleSubmit} className={styles.form}>
+            <label htmlFor="image" className={styles.label}>Imagen:
+            <input type="text" id="image" name="image" value={formData.image} onChange={handleInputChange} />
+            </label>
+            <label htmlFor="name" className={styles.label}>Nombre:
+                <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} />
+            </label>
+            <label htmlFor="height" className={styles.label}>Altura:
+                <input type="text" id="height" name="height" value={formData.height} onChange={handleInputChange} />
+            </label>
+            <label htmlFor="weight" className={styles.label}>Peso:
+                <input type="text" id="weight" name="weight" value={formData.weight} onChange={handleInputChange} />
+            </label>
+            <label htmlFor="health" className={styles.label}>Salud:
+                <input type="text" id="health" name="health" value={formData.health} onChange={handleInputChange} />
+            </label>
+            <label htmlFor="attack" className={styles.label}>Ataque:
+                <input type="text" id="attack" name="attack" value={formData.attack} onChange={handleInputChange} />
+            </label>
+            <label htmlFor="defense" className={styles.label}>Defensa:
+                <input type="text" id="defense" name="defense" value={formData.defense} onChange={handleInputChange} />
+            </label>
+            <label htmlFor="speed" className={styles.label}>Velocidad:
+                <input type="text" id="speed" name="speed" value={formData.speed} onChange={handleInputChange} />
+            </label>
+            <label htmlFor="types">Tipos:</label>
+            {types.map((type) => (
+                <div key={type.id}>
+                <input type="checkbox" id={type.id} name="types" value={type.name} onChange={handleInputChange} />
+                <label htmlFor={type.name}>{type.name}</label>
+                </div>
+            ))}
+            {error && <div>{error}</div>}
+            <button type="submit" className={styles.enviar}>Agregar Pokémon</button>
+            </form>
+        </div>
     );
 }
 

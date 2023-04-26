@@ -1,0 +1,30 @@
+.fondo{
+    font-family: monospace;
+    background: url("../../imagenes/Fondo.jpg") no-repeat center center fixed;
+    background-size: cover;
+    position:absolute;
+
+    width: 100vw;
+    height: 100%;
+
+    padding-left: 42.5vw;
+}
+
+
+.detail{
+    margin-top: 5vw;
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+    width: 15vw;
+
+
+    background-color: white;
+    border-radius: 1vw;
+    border: 2px solid yellow;
+}

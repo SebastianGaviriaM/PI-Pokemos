@@ -78,34 +78,27 @@ class Home extends React.Component {
             />
           ))}
         </div>
-        <nav>
-          <ul className="pagination">
-            <li className="page-item">
+          <ul className={styles.paginacion}>
+            <li>
               <button
                 
                 onClick={() =>
                   this.handlePageChange(currentPage === 1 ? 1 : currentPage - 1)
                 }
+                className={styles.botonPaginacion}
               >
                 Anterior
               </button>
             </li>
             {Array.from({ length: pageCount }).map((_, index) => (
-              <li
-                key={index}
-                className={
-                  index + 1 === currentPage ? "page-item active" : "page-item"
-                }
+              <li   
               >
-                <button
-                  
-                  onClick={() => this.handlePageChange(index + 1)}
-                >
+                <button onClick={() => this.handlePageChange(index + 1)}>
                   {index + 1}
                 </button>
               </li>
             ))}
-            <li className="page-item">
+            <li>
               <button
                 
                 onClick={() =>
@@ -118,7 +111,6 @@ class Home extends React.Component {
               </button>
             </li>
           </ul>
-        </nav>
       </div>
     );
   }

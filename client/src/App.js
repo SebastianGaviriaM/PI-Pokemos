@@ -2,7 +2,7 @@ import './App.css';
 import Home from './components/HomePage/Home';
 import Landing from './components/LandingPage/LandingPage';
 import PokDetail from './components/pokDetail/pokDetail';
-import Form from './components/Form';
+import Form from './components/Form/Form';
 import NavBar from './components/navBar/navBar';
 import { Route } from 'react-router-dom';
 
